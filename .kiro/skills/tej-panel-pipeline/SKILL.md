@@ -21,7 +21,14 @@ python 01_merge_tej_data.py          # 合併原始 zip/CSV → 01_merged_tej_da
 python 02_feature_engineering.py     # 變數建構        → 02_features_data.csv
 python 03_sample_selection.py        # 樣本篩選+產業統計→ 03_sample_data.csv, 03_industry_stats.csv
 python 04_build_model_variables.py   # 產業限定+建模變數→ 04_model_data.csv
+python 05_run_regressions.py         # 模型1/2/3 迴歸    → 05_regression_results.txt, 05_regression_coef.csv
+python 06_robustness_checks.py       # 穩健性檢定        → 06_robustness_results.txt, 06_robustness_coef.csv, 06_robustness_summary.csv
+python 07_generate_paper.py          # 生成 Word 論文    → 水電資源與公司價值_論文.docx
 ```
+
+需額外套件：`statsmodels`、`linearmodels`（面板固定效果迴歸）、
+`pypdf`（讀參考論文架構）、`python-docx`（產出 Word）。
+安裝：`python -m pip install linearmodels pypdf python-docx`
 
 命名慣例：`NN_描述.py` 產出 `NN_描述.csv`；下一步的輸入 = 上一步的輸出，
 方便日後資料更新時「從頭依序重跑」。新增步驟就往後接 `05_`、`06_`。
@@ -65,6 +72,39 @@ python 04_build_model_variables.py   # 產業限定+建模變數→ 04_model_dat
   光電 M2326——水資料最充足者）。
 - 交乘項（模型 2）：水回收率×再生能源、製程水回收率×再生能源。
 - 企業規模：LN(資產總額)。
+
+### 05 實證迴歸（05_run_regressions.py）
+- 方法：雙向固定效果面板迴歸 `PanelOLS`（entity + time effects），
+  公司叢集穩健標準誤（cluster by entity）。
+- 模型 1 基礎：Y = Water + Energy + Controls。
+- 模型 2 綜效：加入 Water×Energy 交乘項。
+- 模型 3 遞延期：Y(t+k) = CAPEX + Water + Energy + Controls，k=1/3/5。
+- 變數：Water=水回收率%、Energy=再生能源使用率、CAPEX=水電設備CAPEX新增額_w、
+  Controls=研究發展費用率、LN資產總額、負債比率；
+  Y=Tobins Q_w（價值）與營業費用率（成本）。
+- 欄名含 `%`、空白、`+` 等字元會先安全化再丟進 linearmodels，結果檔附對照表。
+- 小樣本 + 固定效果吸收後可能降秩（綠電早年多為 0），程式以 `check_rank=False`
+  後備估計並註記係數不穩定。
+
+### 06 穩健性檢定（06_robustness_checks.py）
+- 輸入回到 `03_sample_data.csv`（全產業），因需「擴充產業」，不沿用已限定三大
+  電子業的 04。
+- 水衡量固定為「水回收率%」（不使用製程水回收率），並保留「再生能源使用率」。
+- 產業樣本維度：S1 三大電子 / S2 擴充（再加鋼鐵、化學、紡織、食品、塑膠、
+  電腦週邊）。每個設定跑模型 1、2（Y = Tobins Q_w 與 營業費用率），輸出跨設定
+  對照表 `06_robustness_summary.csv`（含顯著性星號）。
+- 擴充產業（S2）可把有效樣本從 ~196 提升到 ~359，交乘項綜效結論仍穩健。
+
+### 07 生成 Word 論文（07_generate_paper.py）
+- 參照範例論文 PDF（碩士論文）之架構：中文摘要 / Abstract / 第一章 緒論 /
+  第二章 文獻探討（含 H1–H3）/ 第三章 研究方法（資料、變數定義表、模型）/
+  第四章 實證結果（敘述統計、相關矩陣、模型 1/2 迴歸表、穩健性）/
+  第五章 結論與建議 / 參考文獻。
+- 敘述統計與相關矩陣由 `04_model_data.csv` 即時計算；迴歸表係數／t 值／顯著性
+  星號直接讀自 `05_regression_coef.csv` 與 `06_robustness_coef.csv`，確保與分析
+  結果一致。
+- 注意：coef CSV 的「應變數」是安全欄名（如 `Tobins_Q_w`），對表時需用安全名；
+  「變數」欄則為原始名（如 `水回收率%`）。迴歸表的 N 取自實際迴歸結果，非全樣本。
 
 ## 已知資料特性 / 注意事項
 

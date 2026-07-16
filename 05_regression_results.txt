@@ -1,0 +1,446 @@
+TEJ 水電資源實證迴歸結果（雙向固定效果 PanelOLS，公司叢集穩健標準誤）
+
+變數名對照：
+  Tobins_Q_w_tplus5 = Tobins Q_w_t+5
+  再生能源使用率 = 再生能源使用率
+  水電設備CAPEX新增額_w = 水電設備CAPEX新增額_w
+  Tobins_Q_w = Tobins Q_w
+  負債比率 = 負債比率
+  Tobins_Q_w_tplus3 = Tobins Q_w_t+3
+  營業費用率_tplus1 = 營業費用率_t+1
+  水回收率pct = 水回收率%
+  營業費用率 = 營業費用率
+  LN資產總額 = LN資產總額
+  營業費用率_tplus5 = 營業費用率_t+5
+  研究發展費用率 = 研究發展費用率
+  水回收率x再生能源 = 水回收率x再生能源
+  營業費用率_tplus3 = 營業費用率_t+3
+  Tobins_Q_w_tplus1 = Tobins Q_w_t+1
+
+==============================================================================
+[模型1-基礎效應 | Y=Tobins Q_w]
+  應變數 Y = Tobins_Q_w
+  自變數  = ['水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 196，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:             Tobins_Q_w   R-squared:                        0.0964
+Estimator:                   PanelOLS   R-squared (Between):             -24.727
+No. Observations:                 196   R-squared (Within):               0.0349
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -23.708
+Time:                        20:21:01   Log-likelihood                   -15.192
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      2.4744
+Entities:                          65   P-value                           0.0361
+Avg Obs:                       3.0154   Distribution:                   F(5,116)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             1.4690
+                                        P-value                           0.2053
+Time periods:                      11   Distribution:                   F(5,116)
+Avg Obs:                       17.818                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       35.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+水回收率pct        0.0063     0.0055     1.1529     0.2513     -0.0046      0.0172
+再生能源使用率        0.0043     0.0050     0.8606     0.3913     -0.0056      0.0141
+研究發展費用率       -0.0532     0.0283    -1.8804     0.0626     -0.1093      0.0028
+LN資產總額        -0.3272     0.2266    -1.4438     0.1515     -0.7760      0.1217
+負債比率        7.095e-05     0.0068     0.0105     0.9916     -0.0133      0.0135
+==============================================================================
+
+F-test for Poolability: 9.2411
+P-value: 0.0000
+Distribution: F(74,116)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型1-基礎效應 | Y=營業費用率]
+  應變數 Y = 營業費用率
+  自變數  = ['水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 196，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                  營業費用率   R-squared:                        0.7398
+Estimator:                   PanelOLS   R-squared (Between):             -3.0705
+No. Observations:                 196   R-squared (Within):               0.7737
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -3.0899
+Time:                        20:21:01   Log-likelihood                   -239.66
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      65.964
+Entities:                          65   P-value                           0.0000
+Avg Obs:                       3.0154   Distribution:                   F(5,116)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             47.526
+                                        P-value                           0.0000
+Time periods:                      11   Distribution:                   F(5,116)
+Avg Obs:                       17.818                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       35.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+水回收率pct       -0.0022     0.0128    -0.1750     0.8614     -0.0276      0.0231
+再生能源使用率        0.0173     0.0108     1.6009     0.1121     -0.0041      0.0387
+研究發展費用率        1.5189     0.1104     13.762     0.0000      1.3003      1.7375
+LN資產總額        -1.7299     0.9800    -1.7653     0.0801     -3.6708      0.2110
+負債比率           0.0753     0.0333     2.2615     0.0256      0.0094      0.1413
+==============================================================================
+
+F-test for Poolability: 25.996
+P-value: 0.0000
+Distribution: F(74,116)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型2-水能互補綜效 | Y=Tobins Q_w]
+  應變數 Y = Tobins_Q_w
+  自變數  = ['水回收率pct', '再生能源使用率', '水回收率x再生能源', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 196，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:             Tobins_Q_w   R-squared:                        0.1090
+Estimator:                   PanelOLS   R-squared (Between):             -24.610
+No. Observations:                 196   R-squared (Within):               0.0317
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -23.602
+Time:                        20:21:01   Log-likelihood                   -13.810
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      2.3454
+Entities:                          65   P-value                           0.0357
+Avg Obs:                       3.0154   Distribution:                   F(6,115)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             2.3739
+                                        P-value                           0.0337
+Time periods:                      11   Distribution:                   F(6,115)
+Avg Obs:                       17.818                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       35.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+水回收率pct        0.0068     0.0055     1.2215     0.2244     -0.0042      0.0178
+再生能源使用率       -0.0031     0.0047    -0.6594     0.5109     -0.0125      0.0063
+水回收率x再生能源      0.0011     0.0005     2.3158     0.0223      0.0002      0.0020
+研究發展費用率       -0.0545     0.0284    -1.9180     0.0576     -0.1109      0.0018
+LN資產總額        -0.3266     0.2286    -1.4287     0.1558     -0.7794      0.1262
+負債比率       -8.937e-05     0.0068    -0.0131     0.9895     -0.0136      0.0134
+==============================================================================
+
+F-test for Poolability: 9.2918
+P-value: 0.0000
+Distribution: F(74,115)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型2-水能互補綜效 | Y=營業費用率]
+  應變數 Y = 營業費用率
+  自變數  = ['水回收率pct', '再生能源使用率', '水回收率x再生能源', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 196，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                  營業費用率   R-squared:                        0.7419
+Estimator:                   PanelOLS   R-squared (Between):             -3.0821
+No. Observations:                 196   R-squared (Within):               0.7736
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -3.0996
+Time:                        20:21:01   Log-likelihood                   -238.88
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      55.083
+Entities:                          65   P-value                           0.0000
+Avg Obs:                       3.0154   Distribution:                   F(6,115)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             51.282
+                                        P-value                           0.0000
+Time periods:                      11   Distribution:                   F(6,115)
+Avg Obs:                       17.818                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       35.000                                           
+                                                                                
+                             Parameter Estimates                              
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+水回收率pct       -0.0033     0.0132    -0.2471     0.8053     -0.0293      0.0228
+再生能源使用率        0.0348     0.0107     3.2372     0.0016      0.0135      0.0561
+水回收率x再生能源     -0.0026     0.0011    -2.3368     0.0212     -0.0048     -0.0004
+研究發展費用率        1.5221     0.1103     13.795     0.0000      1.3035      1.7406
+LN資產總額        -1.7313     0.9808    -1.7653     0.0802     -3.6740      0.2114
+負債比率           0.0757     0.0333     2.2736     0.0248      0.0098      0.1417
+==============================================================================
+
+F-test for Poolability: 25.322
+P-value: 0.0000
+Distribution: F(74,115)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+1 | Y=Tobins Q_w(t+1)]
+  應變數 Y = Tobins_Q_w_tplus1
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 195，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:      Tobins_Q_w_tplus1   R-squared:                        0.1311
+Estimator:                   PanelOLS   R-squared (Between):             -24.628
+No. Observations:                 195   R-squared (Within):               0.0526
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -25.100
+Time:                        20:21:01   Log-likelihood                   -21.941
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      2.8657
+Entities:                          65   P-value                           0.0123
+Avg Obs:                       3.0000   Distribution:                   F(6,114)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             0.9290
+                                        P-value                           0.4770
+Time periods:                      11   Distribution:                   F(6,114)
+Avg Obs:                       17.727                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       34.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w  3.896e-06  1.767e-05     0.2205     0.8259  -3.111e-05    3.89e-05
+水回收率pct            0.0071     0.0080     0.8779     0.3818     -0.0089      0.0230
+再生能源使用率            0.0119     0.0107     1.1158     0.2669     -0.0093      0.0332
+研究發展費用率           -0.0140     0.0311    -0.4504     0.6533     -0.0755      0.0475
+LN資產總額            -0.4015     0.2137    -1.8791     0.0628     -0.8248      0.0218
+負債比率               0.0132     0.0093     1.4140     0.1601     -0.0053      0.0316
+==================================================================================
+
+F-test for Poolability: 8.6920
+P-value: 0.0000
+Distribution: F(74,114)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+3 | Y=Tobins Q_w(t+3)]
+  應變數 Y = Tobins_Q_w_tplus3
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 181，公司數 = 62，年數 = 10
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:      Tobins_Q_w_tplus3   R-squared:                        0.0334
+Estimator:                   PanelOLS   R-squared (Between):             -13.256
+No. Observations:                 181   R-squared (Within):              -0.0692
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -11.855
+Time:                        20:21:01   Log-likelihood                   -61.591
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      0.5981
+Entities:                          62   P-value                           0.7312
+Avg Obs:                       2.9194   Distribution:                   F(6,104)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             1.4476
+                                        P-value                           0.2037
+Time periods:                      10   Distribution:                   F(6,104)
+Avg Obs:                       18.100                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       33.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w  8.744e-06  2.224e-05     0.3933     0.6949  -3.535e-05   5.284e-05
+水回收率pct            0.0028     0.0058     0.4885     0.6262     -0.0087      0.0143
+再生能源使用率           -0.0108     0.0054    -1.9938     0.0488     -0.0216  -5.846e-05
+研究發展費用率            0.0341     0.0646     0.5283     0.5984     -0.0940      0.1623
+LN資產總額            -0.2606     0.3100    -0.8404     0.4026     -0.8754      0.3543
+負債比率               0.0059     0.0138     0.4242     0.6723     -0.0215      0.0332
+==================================================================================
+
+F-test for Poolability: 4.9275
+P-value: 0.0000
+Distribution: F(70,104)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+5 | Y=Tobins Q_w(t+5)]
+  應變數 Y = Tobins_Q_w_tplus5
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 168，公司數 = 57，年數 = 8
+------------------------------------------------------------------------------
+  ** 注意：設計矩陣降秩（exog does not have full column rank. If you wish to proceed with model estimation irrespective of the numerical accuracy of coefficient estimates, you can set check_rank=False.）。已改用 check_rank=False 估計，部分係數可能因共線性而不穩定，請謹慎解讀。 **
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:      Tobins_Q_w_tplus5   R-squared:                        0.0168
+Estimator:                   PanelOLS   R-squared (Between):             -19.857
+No. Observations:                 168   R-squared (Within):              -0.0193
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -16.364
+Time:                        20:21:01   Log-likelihood                   -104.98
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      0.3382
+Entities:                          57   P-value                           0.8887
+Avg Obs:                       2.9474   Distribution:                    F(5,99)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             0.3708
+                                        P-value                           0.8676
+Time periods:                       8   Distribution:                    F(5,99)
+Avg Obs:                       21.000                                           
+Min Obs:                       6.0000                                           
+Max Obs:                       33.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w -4.326e-05  4.057e-05    -1.0662     0.2889     -0.0001   3.724e-05
+水回收率pct           -0.0044     0.0111    -0.3970     0.6923     -0.0265      0.0177
+研究發展費用率           -0.0092     0.0726    -0.1272     0.8991     -0.1533      0.1348
+LN資產總額            -0.3098     0.4033    -0.7680     0.4443     -1.1101      0.4905
+負債比率               0.0063     0.0219     0.2889     0.7732     -0.0371      0.0498
+==================================================================================
+
+F-test for Poolability: 4.0640
+P-value: 0.0000
+Distribution: F(63,99)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+1 | Y=營業費用率(t+1)]
+  應變數 Y = 營業費用率_tplus1
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 195，公司數 = 65，年數 = 11
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:           營業費用率_tplus1   R-squared:                        0.2921
+Estimator:                   PanelOLS   R-squared (Between):              0.7386
+No. Observations:                 195   R-squared (Within):               0.3391
+Date:                Thu, Jul 16 2026   R-squared (Overall):              0.8457
+Time:                        20:21:01   Log-likelihood                   -338.44
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      7.8386
+Entities:                          65   P-value                           0.0000
+Avg Obs:                       3.0000   Distribution:                   F(6,114)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             1.1334
+                                        P-value                           0.3475
+Time periods:                      11   Distribution:                   F(6,114)
+Avg Obs:                       17.727                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       34.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w     -7e-05     0.0001    -0.5733     0.5676     -0.0003      0.0002
+水回收率pct           -0.0154     0.0197    -0.7789     0.4376     -0.0545      0.0237
+再生能源使用率           -0.0040     0.0301    -0.1341     0.8935     -0.0636      0.0555
+研究發展費用率            0.9526     0.3956     2.4081     0.0176      0.1690      1.7362
+LN資產總額             0.5856     0.8770     0.6678     0.5056     -1.1517      2.3229
+負債比率              -0.0773     0.0485    -1.5959     0.1133     -0.1733      0.0187
+==================================================================================
+
+F-test for Poolability: 16.778
+P-value: 0.0000
+Distribution: F(74,114)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+3 | Y=營業費用率(t+3)]
+  應變數 Y = 營業費用率_tplus3
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 181，公司數 = 62，年數 = 10
+------------------------------------------------------------------------------
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:           營業費用率_tplus3   R-squared:                        0.0358
+Estimator:                   PanelOLS   R-squared (Between):              0.6483
+No. Observations:                 181   R-squared (Within):               0.0502
+Date:                Thu, Jul 16 2026   R-squared (Overall):              0.7127
+Time:                        20:21:01   Log-likelihood                   -342.23
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      0.6437
+Entities:                          62   P-value                           0.6951
+Avg Obs:                       2.9194   Distribution:                   F(6,104)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             1.7177
+                                        P-value                           0.1241
+Time periods:                      10   Distribution:                   F(6,104)
+Avg Obs:                       18.100                                           
+Min Obs:                       2.0000                                           
+Max Obs:                       33.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w     0.0001  8.335e-05     1.7006     0.0920  -2.354e-05      0.0003
+水回收率pct            0.0120     0.0304     0.3936     0.6947     -0.0483      0.0722
+再生能源使用率           -0.0124     0.0113    -1.0998     0.2740     -0.0348      0.0100
+研究發展費用率            0.4065     0.5367     0.7575     0.4505     -0.6577      1.4708
+LN資產總額             1.1901     1.5892     0.7489     0.4556     -1.9613      4.3416
+負債比率              -0.0518     0.0885    -0.5859     0.5592     -0.2273      0.1236
+==================================================================================
+
+F-test for Poolability: 7.0310
+P-value: 0.0000
+Distribution: F(70,104)
+
+Included effects: Entity, Time
+
+==============================================================================
+[模型3-遞延期 t+5 | Y=營業費用率(t+5)]
+  應變數 Y = 營業費用率_tplus5
+  自變數  = ['水電設備CAPEX新增額_w', '水回收率pct', '再生能源使用率', '研究發展費用率', 'LN資產總額', '負債比率']
+  觀測數 N = 168，公司數 = 57，年數 = 8
+------------------------------------------------------------------------------
+  ** 注意：設計矩陣降秩（exog does not have full column rank. If you wish to proceed with model estimation irrespective of the numerical accuracy of coefficient estimates, you can set check_rank=False.）。已改用 check_rank=False 估計，部分係數可能因共線性而不穩定，請謹慎解讀。 **
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:           營業費用率_tplus5   R-squared:                        0.0323
+Estimator:                   PanelOLS   R-squared (Between):             -3.9398
+No. Observations:                 168   R-squared (Within):               0.0627
+Date:                Thu, Jul 16 2026   R-squared (Overall):             -3.3120
+Time:                        20:21:01   Log-likelihood                   -406.75
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      0.6607
+Entities:                          57   P-value                           0.6541
+Avg Obs:                       2.9474   Distribution:                    F(5,99)
+Min Obs:                       1.0000                                           
+Max Obs:                       8.0000   F-statistic (robust):             1.2366
+                                        P-value                           0.2978
+Time periods:                       8   Distribution:                    F(5,99)
+Avg Obs:                       21.000                                           
+Min Obs:                       6.0000                                           
+Max Obs:                       33.000                                           
+                                                                                
+                               Parameter Estimates                                
+==================================================================================
+                Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------
+水電設備CAPEX新增額_w  8.922e-05     0.0002     0.5292     0.5978     -0.0002      0.0004
+水回收率pct           -0.0159     0.0363    -0.4371     0.6630     -0.0880      0.0562
+研究發展費用率            0.4201     0.3993     1.0519     0.2954     -0.3723      1.2124
+LN資產總額             2.9485     1.5012     1.9641     0.0523     -0.0302      5.9272
+負債比率              -0.0233     0.1009    -0.2305     0.8182     -0.2235      0.1769
+==================================================================================
+
+F-test for Poolability: 6.0048
+P-value: 0.0000
+Distribution: F(63,99)
+
+Included effects: Entity, Time
